@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primbon Arti Mimpi Lengkap</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <button id="themeBtn" title="Ganti Tema"><i class="fa-solid fa-moon"></i></button>
+
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-book-open-reader"></i> Arti Mimpi Jawa</h1>
+            <p>Kamus Lengkap Tafsir Mimpi & Sasmita Alam oleh Ki Sasmita Jati</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari kata kunci mimpi (misal: ular, gigi, jatuh)...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="semua">Semua</button>
+            <button class="filter-btn" data-category="hewan">Hewan</button>
+            <button class="filter-btn" data-category="alam">Alam</button>
+            <button class="filter-btn" data-category="tubuh">Anggota Tubuh</button>
+            <button class="filter-btn" data-category="kejadian">Kejadian</button>
+            <button class="filter-btn" data-category="tersimpan"><i class="fa-solid fa-bookmark"></i> Tersimpan</button>
+        </div>
+
+        <main id="dreamList" class="dream-grid"></main>
+
+        <footer>
+            <p>&copy; 2026 Ki Sasmita Jati. Hak Cipta Dilindungi.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
