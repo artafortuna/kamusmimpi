@@ -1253,3 +1253,62 @@ displayDreams(dreamData);
 // =========================================================================
 // TAMAT - SELURUH DATA TELAH BERHASIL DIMASUKKAN
 // =========================================================================
+
+// --- PROTEKSI HALAMAN WEB ---
+
+// 1. Mematikan Klik Kanan
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// 2. Mematikan Shortcut Keyboard (F12, Inspect, View Source, Save, Print)
+document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') e.preventDefault();
+    // Ctrl + Shift + I (Inspect)
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') e.preventDefault();
+    // Ctrl + Shift + J (Console)
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') e.preventDefault();
+    // Ctrl + Shift + C (Inspect Element)
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') e.preventDefault();
+    // Ctrl + U (View Source)
+    if (e.ctrlKey && e.key === 'u') e.preventDefault();
+    // Ctrl + S (Save)
+    if (e.ctrlKey && e.key === 's') e.preventDefault();
+    // Ctrl + P (Print)
+    if (e.ctrlKey && e.key === 'p') e.preventDefault();
+});
+
+// 3. Mematikan Copy, Cut, dan Paste
+document.addEventListener('copy', function(e) { e.preventDefault(); });
+document.addEventListener('cut', function(e) { e.preventDefault(); });
+document.addEventListener('paste', function(e) { e.preventDefault(); });
+
+// 4. Proteksi Screenshot (Mendeteksi hilangnya fokus atau tombol PrintScreen)
+const forbiddenOverlay = document.getElementById('forbidden-overlay');
+
+// Jika window kehilangan fokus (biasanya karena Snipping Tool OS aktif)
+window.addEventListener('blur', function() {
+    forbiddenOverlay.classList.add('active');
+});
+
+// Jika window kembali fokus, hilangkan overlay
+window.addEventListener('focus', function() {
+    forbiddenOverlay.classList.remove('active');
+});
+
+// Jika pengguna menekan tombol PrintScreen
+document.addEventListener('keyup', function(e) {
+    if (e.key === 'PrintScreen') {
+        // Tampilkan layar hitam
+        forbiddenOverlay.classList.add('active');
+        
+        // Coba timpa isi clipboard dengan teks kosong/peringatan (opsional)
+        navigator.clipboard.writeText('FORBIDDEN: Penangkapan layar tidak diizinkan.').catch(err => {});
+        
+        // Hilangkan overlay setelah 2 detik
+        setTimeout(() => {
+            forbiddenOverlay.classList.remove('active');
+        }, 2000);
+    }
+});
