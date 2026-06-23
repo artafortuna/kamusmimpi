@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primbon Arti Mimpi Lengkap</title>
+    <title>Kamus Mimpi Ki Sasmita Jati</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="themeBtn" title="Ganti Tema"><i class="fa-solid fa-moon"></i></button>
+    
+    <div id="unlockScreen" class="unlock-overlay">
+        <div class="unlock-box">
+            <h2><i class="fa-solid fa-lock"></i> Akses Premium</h2>
+            <p>Aplikasi ini berbayar. Silakan masukkan kode akses unik yang Anda dapatkan dari Ki Sasmita Jati.</p>
+            <input type="text" id="unlockCodeInput" placeholder="Contoh: MIMPI-VIP-XXX">
+            <button id="unlockBtn">Buka Aplikasi</button>
+            <p id="unlockError" class="error-msg"></p>
+        </div>
+    </div> 
+
+    <div id="onboardingScreen" class="onboarding-overlay" style="display:none">
+        <div class="onboarding-box">
+            <div class="vip-badge"><i class="fa-solid fa-crown"></i> VIP MEMBER</div>
+            <h2>Selamat Datang, Wahai Sang Pemilik Kebijaksanaan</h2>
+            <p>Sebuah kehormatan yang tak terhingga bagi kami dapat melayani sosok luar biasa seperti Anda. Kehadiran Anda dalam lingkaran eksklusif ini adalah bukti nyata dari selera tinggi dan visi Anda yang melampaui rata-rata.</p>
+            <p>Terima kasih telah mempercayakan perjalanan tafsir mimpi Anda kepada mahakarya Ki Sasmita Jati. Mari melangkah menuju pencerahan.</p>
+            <button id="startAppBtn">Mulai Penjelajahan</button>
+        </div>
+    </div> <button id="themeBtn" title="Ganti Tema"><i class="fa-solid fa-moon"></i></button>
 
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-book-open-reader"></i> Arti Mimpi Jawa</h1>
+            <h1><i class="fa-solid fa-book-open-reader"></i> ARTI MIMPI PREMIUM</h1>
             <p>Kamus Lengkap Tafsir Mimpi & Sasmita Alam oleh Ki Sasmita Jati</p>
         </header>
+
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                <div class="ticker-item">
+                    <i class="fa-regular fa-clock"></i> <span id="realTimeDisplay"></span> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; <span class="ticker-msg">Selamat datang PENGGUNA VIP di aplikasi Arti Mimpi Premium. Temukan makna tersembunyi dari mimpi dan sasmita alam Anda hari ini dan konsultasikan dengan konsultan spiritual Anda jika menemukan arti mimpi yang kurang baik.</span>
+                </div>
+            </div>
+        </div>
 
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Cari kata kunci mimpi (misal: ular, gigi, jatuh)...">
@@ -28,9 +55,9 @@
         </div>
 
         <div class="category-filter">
-    <button class="filter-btn active" data-category="semua">Semua</button>
-    <button class="filter-btn" data-category="tersimpan"><i class="fa-solid fa-bookmark"></i> Tersimpan</button>
-</div>
+            <button class="filter-btn active" data-category="semua">Semua</button>
+            <button class="filter-btn" data-category="tersimpan"><i class="fa-solid fa-bookmark"></i> Tersimpan</button>
+        </div>
 
         <main id="dreamList" class="dream-grid"></main>
 
@@ -38,6 +65,7 @@
             <p>&copy; 2026 Ki Sasmita Jati. Hak Cipta Dilindungi.</p>
         </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
