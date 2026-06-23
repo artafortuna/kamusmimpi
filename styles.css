@@ -422,3 +422,57 @@ body.locked .container, body.locked footer, body.locked #themeBtn {
     width: 100%; padding: 15px; border-radius: 100px; border: none;
     background: var(--accent); color: white; font-weight: 800; cursor: pointer;
 }
+
+/* 1. Mencegah Teks Diblok / Diseleksi */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 2. Desain Layar FORBIDDEN */
+#forbidden-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    letter-spacing: 5px;
+    z-index: 999999; /* Pastikan selalu paling atas */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+}
+
+/* Class ini akan dipicu oleh JavaScript */
+#forbidden-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 3. Proteksi Saat Halaman Diprint (Ctrl+P) */
+@media print {
+    body * {
+        display: none !important;
+    }
+    body:after {
+        content: "FORBIDDEN";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 5rem;
+        font-weight: bold;
+        color: red;
+        background-color: black;
+    }
+}
