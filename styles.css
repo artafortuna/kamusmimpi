@@ -1,3 +1,4 @@
+/* --- 1. VARIABEL TEMA (LIGHT & DARK MODE) --- */
 :root {
     /* Light Mode (Warm Reading Palette) */
     --bg-color: #fcf9f2;
@@ -20,22 +21,40 @@ body.dark-mode {
     --border-color: #3b3733;
 }
 
+/* --- 2. RESET & FONT DASAR --- */
+* {
+    box-sizing: border-box; /* Kunci agar padding tidak membuat layar melebar di HP */
+}
+
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
     margin: 0;
-    padding: 20px;
-    font-size: 1.15rem; /* Font lebih besar */
+    padding: 0; /* Padding dipindah ke .container agar tidak bentrok */
+    font-size: 1.15rem;
     transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden; /* Mencegah layar bisa digeser ke kanan/kiri */
 }
 
+/* --- 3. KERANGKA UTAMA (FLEXBOX UNTUK FOOTER) --- */
 .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Tinggi minimal sama dengan tinggi layar penuh */
+    width: 100%;
     max-width: 950px;
     margin: 0 auto;
+    padding: 20px;
 }
 
-/* Theme Toggle Button */
+/* Bagian tengah yang akan membentang mendorong footer ke bawah */
+main#dreamList {
+    flex: 1; 
+    width: 100%;
+}
+
+/* --- 4. TOMBOL TEMA & HEADER --- */
 #themeBtn {
     position: fixed;
     top: 20px;
@@ -52,13 +71,18 @@ body {
     z-index: 1000;
     transition: 0.3s;
 }
-#themeBtn:hover { transform: scale(1.1); border-color: var(--accent); }
+
+#themeBtn:hover { 
+    transform: scale(1.1); 
+    border-color: var(--accent); 
+}
 
 header {
     text-align: center;
     margin-bottom: 35px;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 header h1 {
@@ -67,7 +91,11 @@ header h1 {
     font-size: 2.8rem;
 }
 
-.search-box { position: relative; margin-bottom: 30px; }
+/* --- 5. SEARCH BOX & FILTER --- */
+.search-box { 
+    position: relative; 
+    margin-bottom: 30px; 
+}
 
 .search-box input {
     width: 100%;
@@ -120,10 +148,12 @@ header h1 {
     border-color: var(--accent);
 }
 
+/* --- 6. GRID & KARTU MIMPI --- */
 .dream-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
+    margin-bottom: 40px; /* Jarak dengan footer */
 }
 
 .dream-card {
@@ -132,10 +162,13 @@ header h1 {
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.03);
     border-left: 6px solid var(--accent);
+    position: relative; /* Penting untuk posisi tombol bookmark */
     transition: transform 0.2s, background-color 0.3s;
 }
 
-.dream-card:hover { transform: translateY(-5px); }
+.dream-card:hover { 
+    transform: translateY(-5px); 
+}
 
 .dream-card h3 {
     margin-top: 0;
@@ -144,7 +177,7 @@ header h1 {
     line-height: 1.4;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 12px;
-    width: 85%;
+    width: 85%; /* Sisa 15% untuk ruang tombol bookmark agar teks tidak nabrak */
 }
 
 .dream-card p {
@@ -165,8 +198,11 @@ header h1 {
     font-weight: bold;
 }
 
-/* Bookmark Button in Card */
+/* --- 7. TOMBOL BOOKMARK --- */
 .bookmark-btn {
+    position: absolute; /* Mengatur posisi ikon persis di pojok kartu */
+    top: 25px;
+    right: 25px;
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -175,7 +211,21 @@ header h1 {
     transition: 0.2s;
     padding: 0;
 }
-.bookmark-btn:hover { color: var(--accent); transform: scale(1.1); }
-.bookmark-btn.active-bookmark { color: var(--accent); }
 
-footer { text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.9rem; }
+.bookmark-btn:hover { 
+    color: var(--accent); 
+    transform: scale(1.1); 
+}
+
+.bookmark-btn.active-bookmark { 
+    color: var(--accent); 
+}
+
+/* --- 8. FOOTER --- */
+footer { 
+    text-align: center; 
+    padding: 20px 0 10px 0;
+    margin-top: auto; /* Kunci agar footer selalu terdorong ke bawah */
+    color: var(--text-muted); 
+    font-size: 0.9rem; 
+}
