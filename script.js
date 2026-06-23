@@ -1,3 +1,129 @@
+const validCodes = [
+    "JAGAD-SUKMA-001", "SASMITA-JATI-002", "WAHYU-AGUNG-003", "PUSAKA-KALA-004", "AKSA-PADMA-005",
+    "CAKRA-MANTRA-006", "BUMI-LANGIT-007", "KANJENG-DEWA-008", "HYANG-SUCI-009", "MISTIK-ARKA-010",
+    "JAGAD-KEMBANG-011", "SASMITA-WETON-012", "WAHYU-SARI-013", "PUSAKA-BANYU-014", "AKSA-KENCANA-015",
+    "CAKRA-BUANA-016", "BUMI-MAYA-017", "KANJENG-RATU-018", "HYANG-WIDHI-019", "MISTIK-BAYU-020",
+    "JAGAD-PRAMANA-021", "SASMITA-KUNCORO-022", "WAHYU-LINTANG-023", "PUSAKA-SANG-024", "AKSA-GIRI-025",
+    "CAKRA-NUR-026", "BUMI-AMERTA-027", "KANJENG-PRABU-028", "HYANG-AGNI-029", "MISTIK-KALA-030",
+    "JAGAD-WICAKSANA-031", "SASMITA-PAGELARAN-032", "WAHYU-SEMBODRO-033", "PUSAKA-RATU-034", "AKSA-WANARA-035",
+    "CAKRA-TUNGGAL-036", "BUMI-KENCANA-037", "KANJENG-RAJA-038", "HYANG-WENANG-039", "MISTIK-GARDA-040",
+    "JAGAD-BASKARA-041", "SASMITA-GATRA-042", "WAHYU-PRAMESTI-043", "PUSAKA-BAYA-044", "AKSA-WIRA-045",
+    "CAKRA-JALA-046", "BUMI-KUSUMA-047", "KANJENG-SUKMA-048", "HYANG-KUSUMO-049", "MISTIK-GURU-050",
+    "JAGAD-KUSUMA-051", "SASMITA-LOKA-052", "WAHYU-KUSUMA-053", "PUSAKA-NAGA-054", "AKSA-DIPA-055",
+    "CAKRA-YOGA-056", "BUMI-WIRA-057", "KANJENG-AJI-058", "HYANG-BUANA-059", "MISTIK-PURI-060",
+    "JAGAD-WIRA-061", "SASMITA-WIRA-062", "WAHYU-JAYA-063", "PUSAKA-SARI-064", "AKSA-NUR-065",
+    "CAKRA-SARI-066", "BUMI-JAYA-067", "KANJENG-GIRI-068", "HYANG-JATI-069", "MISTIK-KUSUMA-070",
+    "JAGAD-TUNGGAL-071", "SASMITA-KALA-072", "WAHYU-BUANA-073", "PUSAKA-WIRA-074", "AKSA-BANYU-075",
+    "CAKRA-WIRA-076", "BUMI-GIRI-077", "KANJENG-NAGA-078", "HYANG-GURU-079", "MISTIK-WIRA-080",
+    "JAGAD-NUR-081", "SASMITA-SARI-082", "WAHYU-GIRI-083", "PUSAKA-JAYA-084", "AKSA-KALA-085",
+    "CAKRA-BUANA-086", "BUMI-SARI-087", "KANJENG-WIRA-088", "HYANG-WIRA-089", "MISTIK-JATI-090",
+    "JAGAD-SARI-091", "SASMITA-NAGA-092", "WAHYU-WIRA-093", "PUSAKA-GIRI-094", "AKSA-JATI-095",
+    "CAKRA-WIRA-096", "BUMI-WIRA-097", "KANJENG-SARI-098", "HYANG-NAGA-099", "MISTIK-SARI-100"
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- FITUR WAKTU REAL-TIME (INDONESIA) ---
+    const timeDisplay = document.getElementById("realTimeDisplay");
+    
+    const updateTime = () => {
+        const now = new Date();
+        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        
+        const dayName = days[now.getDay()];
+        const day = now.getDate();
+        const monthName = months[now.getMonth()];
+        const year = now.getFullYear();
+        
+        // Memastikan jam dan menit selalu 2 digit (misal: 09.05)
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        
+        timeDisplay.textContent = `${dayName}, ${day} ${monthName} ${year} Pukul ${hours}.${minutes} WIB`;
+    };
+
+    // Jika elemen waktu ada, jalankan fungsinya setiap 1 detik
+    if (timeDisplay) {
+        updateTime(); // Panggil pertama kali agar tidak kosong
+        setInterval(updateTime, 1000); // Perbarui detik demi detik
+    }
+    // -----------------------------------------
+    // Matikan fitur penghapus memori ini dengan menambahkan tanda // di depannya
+    // agar pembeli tidak perlu login terus-menerus setiap buka aplikasi
+    // localStorage.removeItem("kamusMimpiUnlocked"); 
+// --- AMBIL ELEMEN DARI HTML ---
+    const unlockScreen = document.getElementById("unlockScreen");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const unlockInput = document.getElementById("unlockCodeInput");
+    const unlockError = document.getElementById("unlockError");
+    
+    // Elemen Onboarding VIP Baru
+    const onboardingScreen = document.getElementById("onboardingScreen");
+    const startAppBtn = document.getElementById("startAppBtn");
+
+    // --- LOGIKA UNTUK MEMBUKA APLIKASI UTAMA ---
+    const tampilkanKontenAplikasi = () => {
+        document.body.classList.remove("locked"); // Lepas kunci body
+        
+        // Paksa semua elemen utama muncul
+        const mainContainer = document.querySelector(".container");
+        const footer = document.querySelector("footer");
+        const themeBtn = document.getElementById("themeBtn");
+        
+        if (mainContainer) mainContainer.style.display = "block";
+        if (footer) footer.style.display = "block";
+        if (themeBtn) themeBtn.style.display = "block";
+    };
+
+    // --- LOGIKA UTAMA SETELAH KODE SUKSES ---
+    const bukaAplikasi = () => {
+        unlockScreen.style.display = "none"; 
+        
+        // UBAH BAGIAN INI: 
+        // Kita paksa onboarding muncul setiap saat, 
+        // jadi kita hapus pengecekan localStorage.getItem("onboardingDone")
+        
+        if (onboardingScreen) {
+            onboardingScreen.style.display = "flex"; // Selalu munculkan sambutan
+        } else {
+            tampilkanKontenAplikasi(); // Jika onboarding tidak ada, langsung buka
+        }
+    };
+
+    // --- AKSI SAAT TOMBOL "MULAI PENJELAJAHAN" DI LAYAR SAMBUTAN VIP DITEKAN ---
+    if (startAppBtn) {
+        startAppBtn.addEventListener("click", () => {
+            localStorage.setItem("onboardingDone", "true"); // Catat di memori HP agar tidak muncul lagi
+            if (onboardingScreen) onboardingScreen.style.display = "none"; // Sembunyikan sambutan VIP
+            tampilkanKontenAplikasi(); // Buka aplikasi utamanya
+        });
+    }
+
+    // Cek apakah HP ini sudah punya izin (sudah pernah masuk)
+    if (localStorage.getItem("kamusMimpiUnlocked") === "true") {
+        bukaAplikasi();
+    } else {
+        document.body.classList.add("locked");
+        unlockScreen.style.display = "flex";
+    }
+
+    // Ketika Tombol Ditekan
+    unlockBtn.addEventListener("click", () => {
+        const userCode = unlockInput.value.trim().toUpperCase();
+        
+        if (validCodes.includes(userCode)) {
+            // Jika Benar
+            localStorage.setItem("kamusMimpiUnlocked", "true");
+            bukaAplikasi(); // Buka mulus tanpa alert agar tidak freeze
+        } else {
+            // Jika Salah
+            unlockError.textContent = "Kode tidak valid! Silakan periksa kembali atau hubungi Ki Sasmita Jati.";
+            unlockError.style.display = "block";
+        }
+    });
+});
+
 // DATABASE UTAMA ARTI MIMPI - MULAI DARI NOL
 const dreamData = [
     { title: "Mimpi Rambutnya Putih", category: "tubuh", desc: "Akan cepat beruntung dalam usaha dan akan berumur panjang." },
